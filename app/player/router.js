@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const { 
-    addPlayer, 
-    getPlayers, 
-    getPlayer
- } = require('./controller');
+    createPlayer, 
+    getListPlayers, 
+    getThePlayer
+ } = require('./handler');
 
-router.get('/', getPlayers)
-router.get('/:id', getPlayer)
-router.post('/create', addPlayer)
+router.get('/', getListPlayers)
+router.get('/:id', getThePlayer)
+router.post('/create', createPlayer)
 
 module.exports = router;

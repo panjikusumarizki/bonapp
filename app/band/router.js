@@ -1,17 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const { 
-    addBand,
-    getBands,
-    getBand,
-    editBand,
-    addPlayerToBand
- } = require('./controller');
+    createBand,
+    getListBands,
+    getDetailBand,
+    editTheBand,
+    addPlayerToTheBand
+ } = require('./handler');
 
-router.get('/', getBands)
-router.get('/:id', getBand)
-router.post('/create', addBand)
-router.put('/edit/:id', editBand)
-router.post('/personnel', addPlayerToBand)
+router.get('/', getListBands)
+router.get('/:id', getDetailBand)
+router.post('/create', createBand)
+router.put('/edit/:id', editTheBand)
+router.post('/personnel', addPlayerToTheBand)
 
 module.exports = router;
