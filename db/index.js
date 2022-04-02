@@ -1,11 +1,21 @@
 const mongoose = require('mongoose')
 const { urlDB } = require('../config')
 
-mongoose.connect(urlDB, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true 
-})
+const connect = () => {
+    return new Promise((resolve, reject) => {
+        mongoose.connect(urlDB, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true 
+        })
+        .then((err, res) => {
+            if (err) return reject(err)
+            resolve()
+        })
+    })
+}
 
-const db = mongoose.connection
+const close = () => {
+    return mongoose.disconnect()
+}
 
-module.exports = db
+module.exports = { connect, close }
