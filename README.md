@@ -28,7 +28,7 @@ $ npm test
 Database: MongoDB.  
 Database name: bonapp.  
 Collections: band, player.  
-Field of Collection `band`: name, max_member, current_member, members, createdAt, updatedAt.  
-Field of Collection `player`: name, position, band_id, createdAt, updatedAt.  
+Field of Collection `band`: _id, name, max_member, current_member, members, createdAt, updatedAt.  
+Field of Collection `player`: _id, name, position, band_id, createdAt, updatedAt.  
 
 
