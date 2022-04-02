@@ -1,10 +1,19 @@
 const chai = require('chai')
 const expect = chai.expect
 const chaiHttp = require('chai-http')
+const db = require('../db/index')
 
 chai.use(chaiHttp)
 
 const app = require('../app')
+
+db.on('open', () => {
+    console.log('database connected');
+})
+
+db.on('error', () => {
+    console.log('connection to database error');
+})
 
 describe('Band Unit Test', function () {
     it('should get all the bands', (done) => {
@@ -15,7 +24,7 @@ describe('Band Unit Test', function () {
             expect(res.body).to.have.property('status')
             expect(res.body).to.have.property('data')
             expect(res.body.data).to.have.an('array')
-            done()
+            done();
         })
     })
 
@@ -51,7 +60,7 @@ describe('Band Unit Test', function () {
             expect(res.body).to.have.property('status')
             expect(res.body).to.have.property('message')
             expect(res.body.message).to.equal('Succeed add new band')
-            done()
+            done();
         })
     })
 
@@ -76,7 +85,7 @@ describe('Band Unit Test', function () {
             expect(res.body.data).to.have.property('name')
             expect(res.body.data).to.have.property('max_member')
             expect(res.body.data).to.have.property('current_member')
-            done()
+            done();
         })
     })
 
@@ -98,7 +107,7 @@ describe('Band Unit Test', function () {
             expect(res.body.status).to.equal('success')
             expect(res.body).to.have.property('message')
             expect(res.body.message).to.equal('Succeed add player to band')
-            done()
+            done();
         })
     })
 })
@@ -122,6 +131,33 @@ describe('Player Unit Test', function () {
             expect(res.body.status).to.equal('success')
             expect(res.body).to.have.property('message')
             expect(res.body.message).to.equal('Succeed add new player')
+            done()
+        })
+    })
+
+    it('should get all player', (done) => {
+        chai.request(app).get('/api/v1/player').end((err, res) => {
+            expect(err).to.be.null
+            expect(res).to.have.status(200)
+            expect(res.body).to.be.an('object')
+            expect(res.body).to.have.property('status')
+            expect(res.body).to.have.property('data')
+            expect(res.body.data).to.have.an('array')
+            done();
+        })
+    })
+
+    it('should get detail of the player', (done) => {
+        chai.request(app).get('/api/v1/player/6247104b2bb2662566fc3fb4').end((err, res) => {
+            expect(err).to.be.null
+            expect(res).to.have.status(200)
+            expect(res.body).to.be.an('object')
+            expect(res.body).to.have.property('status')
+            expect(res.body).to.have.property('data')
+            expect(res.body.data).to.be.an('object')
+            expect(res.body.data).to.have.property('name')
+            expect(res.body.data).to.have.property('position')
+            expect(res.body.data).to.have.property('band')
             done()
         })
     })

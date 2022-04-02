@@ -23,6 +23,8 @@ const getPlayers = async () => {
 const getPlayer = async (id) => {
     try {
         const player = await Player.findOne({ _id: id })
+        .select('name position')
+        .populate({ path: 'band_id', select: 'id name'})
 
         return player
     } catch (error) {

@@ -51,10 +51,25 @@ const getThePlayer = async (req, res) => {
 
         const player = await getPlayer(id)
 
-        res.status(200).send({
-            status: 'success',
-            data: player
-        })
+        if (player.band_id) {
+            res.status(200).send({
+                status: 'success',
+                data: {
+                    name: player.name,
+                    position: player.position,
+                    band: player.band_id.name
+                }
+            })
+        } else {
+            res.status(200).send({
+                status: 'success',
+                data: {
+                    name: player.name,
+                    position: player.position,
+                    band: ''
+                }
+            })
+        }
     } catch (error) {
         res.status(500).json({
             status: 500,
