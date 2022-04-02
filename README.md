@@ -21,7 +21,7 @@ $ npm run dev
 Untuk menjalankan perintah test, ketikan:
 ```bash
 # run testing command
-$ npm test
+$ npm run test
 ```
 
 ### `Struktur Database`
